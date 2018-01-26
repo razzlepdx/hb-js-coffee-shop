@@ -53,12 +53,19 @@
 
     function makeCoffee() {
         //
-        let steepCoffee = function () {coffeeImage.setAttribute("src", "static/coffee_machine.jpg")};
+        let steepCoffee = function () {
+            coffeeImage.setAttribute("src", "static/coffee_machine.jpg")
+            setTimeout(pourCoffee, 2500);
+        };
         setTimeout(steepCoffee, 1500);
-        let pourCoffee = function () {coffeeImage.setAttribute("src", "static/coffee_mug.jpg")};
-        setTimeout(pourCoffee, 4000);
+        let pourCoffee = function () {
+            coffeeImage.setAttribute("src", "static/coffee_mug.jpg")
+            setTimeout(newCoffee, 2500);
+        };
+
         let newCoffee = function () {coffeeImage.setAttribute("src", "static/coffee_beans.jpg")};
-        setTimeout(newCoffee, 7500);
+
+        // setTimeout(function() {coffeeImage.setAttribute("src", "static/coffee_machine.jpg")}, 1500);
     }
 
     coffeeImage.addEventListener('click', makeCoffee);
