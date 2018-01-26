@@ -53,10 +53,17 @@
 
     function makeCoffee() {
         //
-        coffeeImage.setAttribute("src", "static/coffee_mug.jpg");
+        let steepCoffee = function () {coffeeImage.setAttribute("src", "static/coffee_machine.jpg")};
+        setTimeout(steepCoffee, 1500);
+        let pourCoffee = function () {coffeeImage.setAttribute("src", "static/coffee_mug.jpg")};
+        setTimeout(pourCoffee, 4000);
+        let newCoffee = function () {coffeeImage.setAttribute("src", "static/coffee_beans.jpg")};
+        setTimeout(newCoffee, 7500);
     }
 
     coffeeImage.addEventListener('click', makeCoffee);
+
+
 
 
     let revenueMessage;
