@@ -48,37 +48,42 @@
 <script>
 
     // Set these variables to their DOM elements
+    $("#coffee-image").attr("src", "static/coffee_beans.jpg");
 
-    let coffeeImage = $("#coffee-image");
-    coffeeImage.attr("src", "static/coffee_beans.jpg");
+    let drinksOrdered = [];
 
-    function makeCoffee() {
+    function makeCoffee(drinkType) {
         // Changes coffee image according to process.
 
-        let steepCoffee = function () {
-            coffeeImage.attr("src", "static/coffee_machine.jpg")
-            setTimeout(pourCoffee, 2500);
+        drinksOrdered.push(drinkType);
+        console.log(drinksOrdered);
+        let total = revenue(drinksOrdered, prices);
+
+        let brewCoffee = function () {
+            $("#coffee-image").attr("src", "static/coffee_machine.jpg");
+            setTimeout(pourCoffee, 1500);
         };
 
         let pourCoffee = function () {
-            coffeeImage.attr("src", "static/coffee_mug.jpg")
-            setTimeout(newCoffee, 2500);
+            $("#coffee-image").attr("src", "static/coffee_mug.jpg");
+            setTimeout(newCoffee, 1500);
         };
 
-        let newCoffee = function () {coffeeImage.attr("src", "static/coffee_beans.jpg")};
+        let newCoffee = function () {
+            $("#revenue").html("$" + total.toFixed(2));
+            $("#coffee-image").attr("src", "static/coffee_beans.jpg");
 
-        setTimeout(steepCoffee, 1500);
+    };
+        setTimeout(brewCoffee, 1500);
         // setTimeout(function() {coffeeImage.setAttribute("src", "static/coffee_machine.jpg")}, 1500);
+
+
     }
-
-    coffeeImage.on('click', makeCoffee);
-
-
-
-
-    let revenueMessage;
-
-    // use this JavaScript object in further study step
+    $("img").on('change', function() {$("img").fadeOut().fadeIn();})
+    $("#coffee-image").on('click', function () { makeCoffee("brew");});
+    $("#espresso").on('click', function () { makeCoffee("espresso"); });
+    $("#latte").on('click', function() { makeCoffee("latte"); });
+    $("#hot-chocolate").on('click', function() { makeCoffee("hot chocolate");});
 
     const prices = {
         "brew": 2.05,
@@ -86,6 +91,24 @@
         "latte": 4.15,
         "hot chocolate": 2.50
     };
+
+    function revenue(drinksOrdered, prices) {
+        // Checks how many drinks has been ordered and sums up the total cost.
+
+        let runningTotal = 0;
+        for (let i = 0; i < drinksOrdered.length; i++) {
+            let drink = drinksOrdered[i];
+            runningTotal += prices[drink];
+
+        }
+
+        return runningTotal;
+    }
+
+
+
+    // use this JavaScript object in further study step
+
 
 
 </script>
