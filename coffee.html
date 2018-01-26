@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>Hackbright Coffee Shop</title>
 
     <!-- Bootstrap links -->
@@ -48,27 +49,29 @@
 
     // Set these variables to their DOM elements
 
-    let coffeeImage = document.querySelector("#coffee-image");
-    coffeeImage.setAttribute("src", "static/coffee_beans.jpg");
+    let coffeeImage = $("#coffee-image");
+    coffeeImage.attr("src", "static/coffee_beans.jpg");
 
     function makeCoffee() {
-        //
+        // Changes coffee image according to process.
+
         let steepCoffee = function () {
-            coffeeImage.setAttribute("src", "static/coffee_machine.jpg")
+            coffeeImage.attr("src", "static/coffee_machine.jpg")
             setTimeout(pourCoffee, 2500);
         };
-        setTimeout(steepCoffee, 1500);
+
         let pourCoffee = function () {
-            coffeeImage.setAttribute("src", "static/coffee_mug.jpg")
+            coffeeImage.attr("src", "static/coffee_mug.jpg")
             setTimeout(newCoffee, 2500);
         };
 
-        let newCoffee = function () {coffeeImage.setAttribute("src", "static/coffee_beans.jpg")};
+        let newCoffee = function () {coffeeImage.attr("src", "static/coffee_beans.jpg")};
 
+        setTimeout(steepCoffee, 1500);
         // setTimeout(function() {coffeeImage.setAttribute("src", "static/coffee_machine.jpg")}, 1500);
     }
 
-    coffeeImage.addEventListener('click', makeCoffee);
+    coffeeImage.on('click', makeCoffee);
 
 
 
